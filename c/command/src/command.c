@@ -64,10 +64,10 @@ char ** command_get_arg(char * param, int *para_num)
 {
     char **param_array;
     *para_num = command_arg_num(param);
-    param_array = (char **)malloc(para_num * sizeof(char *));
+    param_array = (char **)malloc((*para_num) * sizeof(char *));
 
     char *start = param, *end = param;
-    i = 0;
+    int i = 0;
     while(*end != 0)
     {
         while((*end != ' ') && (*end != 0))

@@ -6,7 +6,22 @@
 #include "command.h"
 
 
-void command_handler(command_t *command_array, char *cmd)
+static command_t * command_search(command_t * command_array, char * cmd, int len)
+{
+    int i = 0;
+    if(len == 0)    return NULL;
+
+    while(command_array[i].cmd != NULL 
+        && strlen(command_array[i].cmd) != len || strncmp(cmd, command_array[i].cmd, len))
+        i++;
+    
+    if(command_array[i].cmd == NULL)
+        return NULL;
+    else
+        return &command_array[i];
+}
+
+void command_handler(command_t *command_array, char * cmd)
 {
     command_t * cmd_ptr;
     int cmd_len = 0;
@@ -23,22 +38,6 @@ void command_handler(command_t *command_array, char *cmd)
             cmd_len++;
         cmd_ptr->callback(cmd + cmd_len, cmd_ptr->data);
     }
-}
-
-
-static command_t * command_search(command_t * command_array, char * cmd, int len)
-{
-    int i = 0;
-    if(len == 0)    return NULL;
-
-    while(command_array[i].cmd != NULL 
-        && strlen(command_array[i].cmd) != len || strncmp(cmd, command_array[i].cmd, len))
-        i++;
-    
-    if(command_array[i].cmd == NULL)
-        return NULL;
-    else
-        return &command_array[i];
 }
 
 int command_arg_num(char * param)

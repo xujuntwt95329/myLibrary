@@ -11,7 +11,7 @@ struct command
 {
     char *cmd;
     char *description;
-    command_callback_t callback;
+    command_callback_t * callback;
     void *data;
 }command_t;
 

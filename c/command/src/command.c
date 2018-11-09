@@ -31,7 +31,7 @@ void command_handler(command_t *command_array, char * cmd)
     cmd_ptr = command_search(command_array, cmd, cmd_len);
 
     if(!cmd_ptr)
-        fprintf(stderr, "unknow command %s. \r\n");
+        printf("unknow command %s. \n", cmd);
     else
     {
         while(cmd[cmd_len] != 0 && (isspace(cmd[cmd_len] & 0xFF)))
@@ -60,11 +60,32 @@ int command_arg_num(char * param)
     return cnt;
 }
 
-int command_get_arg(char * param)
+char ** command_get_arg(char * param, int *para_num)
 {
-    char *end = param;
-    while((*end != ' ') && (*end != 0))
-        end++;
-    return end - param;
+    char **param_array;
+    *para_num = command_arg_num(param);
+    param_array = (char **)malloc(para_num * sizeof(char *));
+
+    char *start = param, *end = param;
+    i = 0;
+    while(*end != 0)
+    {
+        while((*end != ' ') && (*end != 0))
+            end++;
+        if(*end == ' ')
+        {
+            *end = 0;
+            param_array[i] = (char *)malloc((end - start) * sizeof(char));
+            sprintf(param_array[i], "%s", start);
+            end++;
+            while(*end == ' ')
+                end++;
+            start = end;
+            i++;
+        }
+    }
+    param_array[i] = (char *)malloc((end - start) * sizeof(char));
+    sprintf(param_array[i], "%s", start);
+    return param_array;
 }
 

@@ -17,7 +17,7 @@ struct command
 
 void command_handler(command_t * command_array, char * cmd);
 int command_arg_num(char * param);
-int command_get_arg(char * param);
+char ** command_get_arg(char * param, int *para_num);
 
 
 #endif

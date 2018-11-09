@@ -12,14 +12,16 @@ int g_quit = 0;
 
 static void command_test(char * param, void * data)
 {
-    int param_num = command_arg_num(param);
+    int i = 0, param_num;
+    int **param_array;
+    param_array = command_get_arg(param, &param_num);
     int param_len = 0;
-    while(param_num--)
+    while(i < param_num)
     {
-        param_len = command_get_arg(param + param_len+1);
-        printf("parameter:%s\n", param);
-        param += param_len;
+        printf("%d%s parameter:%s\n", i, i == 1?"st":(i == 2?"nd":"th"),  param_array[i]);
+        i++;
     }
+    free(param_array);
 }
 
 static void quit(char *param, void * data)

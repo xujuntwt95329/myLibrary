@@ -36,9 +36,9 @@ int main(int argc, char const *argv[])
 
     command_t commands[] =
     {
-            {"test", "Test command line.", NULL, command_test, NULL},
+            {"test", "Test command line.", command_test, NULL},
 
-            {"q", "Quit the server.", NULL, quit, NULL},
+            {"q", "Quit the server.", quit, NULL},
 
             COMMAND_END
     };

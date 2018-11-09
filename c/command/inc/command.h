@@ -15,7 +15,7 @@ struct command
     void *data;
 }command_t;
 
-void command_handle(command_t * command_array, char * cmd);
+void command_handler(command_t * command_array, char * cmd);
 int command_arg_num(char * param);
 int command_get_arg(char * param);
 

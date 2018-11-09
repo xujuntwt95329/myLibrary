@@ -6,7 +6,7 @@
 #include "command.h"
 
 
-void command_handle(command_t *command_array, char *cmd)
+void command_handler(command_t *command_array, char *cmd)
 {
     command_t * cmd_ptr;
     int cmd_len = 0;

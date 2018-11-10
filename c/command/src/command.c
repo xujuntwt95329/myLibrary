@@ -12,9 +12,8 @@ static command_t * command_search(command_t * command_array, char * cmd, int len
     if(len == 0)    return NULL;
 
     while(command_array[i].cmd != NULL 
-        && strlen(command_array[i].cmd) != len || strncmp(cmd, command_array[i].cmd, len))
+        && (strlen(command_array[i].cmd) != len || strncmp(cmd, command_array[i].cmd, len)))
         i++;
-    
     if(command_array[i].cmd == NULL)
         return NULL;
     else
@@ -31,7 +30,10 @@ void command_handler(command_t *command_array, char * cmd)
     cmd_ptr = command_search(command_array, cmd, cmd_len);
 
     if(!cmd_ptr)
-        printf("unknow command %s. \n", cmd);
+    {
+        printf("unknow command %s \n", cmd);
+        return;
+    }
     else
     {
         while(cmd[cmd_len] != 0 && (isspace(cmd[cmd_len] & 0xFF)))

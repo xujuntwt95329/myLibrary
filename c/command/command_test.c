@@ -18,7 +18,7 @@ static void command_test(char * param, void * data)
     int param_len = 0;
     while(i < param_num)
     {
-        printf("%d%s parameter:%s\n", i, i == 1?"st":(i == 2?"nd":"th"),  param_array[i]);
+        printf("%d%s parameter:%s\n", i+1, i+1 == 1?"st":(i+1 == 2?"nd":"th"),  param_array[i]);
         i++;
     }
     free(param_array);
@@ -74,7 +74,6 @@ int main(int argc, char const *argv[])
                 {
                     buffer[numBytes] = 0;
                     command_handler(commands, (char*)buffer);
-                    fprintf(stdout, "%s", (unsigned char *)buffer);
                     fprintf(stdout, "\r\n");
                 }
                 else

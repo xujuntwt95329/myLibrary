@@ -5,6 +5,16 @@
 #include <unistd.h>
 #include "command.h"
 
+static void command_help(command_t * command_array)
+{
+    int i = 0;
+    while(command_array[i].cmd != NULL)
+    {
+	printf("%s \t-> %s\n", command_array[i].cmd, command_array[i].description);
+	i++;
+    }
+    printf("help \t-> Print help message\n");
+}
 
 static command_t * command_search(command_t * command_array, char * cmd, int len)
 {
@@ -31,7 +41,10 @@ void command_handler(command_t *command_array, char * cmd)
 
     if(!cmd_ptr)
     {
-        printf("unknow command %s \n", cmd);
+	if(!strncmp(cmd, "help", 4))
+	    command_help(command_array);
+	else
+            printf("unknow command %s \n", cmd);
         return;
     }
     else
